@@ -1,0 +1,37 @@
+{
+  "name": "zeth/soft-expert",
+  "description": "test for php developer role",
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    },
+    "classmap": [
+      "src/"
+    ],
+    "files": []
+  },
+  "authors": [
+    {
+      "name": "Marcio T Rodrigues",
+      "email": "marcio.theo.92@gmail.com"
+    }
+  ],
+  "require": {
+    "illuminate/database": "^10.11",
+    "phpoption/phpoption": "^1.9",
+    "vlucas/phpdotenv": "^5.5",
+    "firebase/php-jwt": "^6.5",
+    "paragonie/sodium_compat": "^1.20",
+    "illuminate/container": "^10.11",
+    "illuminate/contracts": "^10.11",
+    "illuminate/support": "^10.11",
+    "nesbot/carbon": "^2.66"
+  },
+  "scripts": {
+    "serve": [
+      "Composer\\Config::disableProcessTimeout",
+      "cd ./src/main && php -S localhost:8003"
+    ],
+    "migrate": "cd ./src/application/commands && php migration-up.php"
+  }
+}
