@@ -9,8 +9,8 @@ use Src\Main\Factories\Application\Controllers\Product\MakeListProductsControlle
 use Src\Main\Factories\Application\Controllers\Product\MakeShowProductController;
 use Src\Main\Factories\Application\Controllers\Product\MakeUpdateProductController;
 
-Router::get('/products', app(MakeListProductsController::class));
-Router::get('/products/:id', app(MakeShowProductController::class));
-Router::post('/products', app(MakeInsertProductController::class));
-Router::put('/products/:id', app(MakeUpdateProductController::class));
-Router::delete('/products/:id', app(MakeDeleteProductController::class));
+Router::get('/products', app(MakeListProductsController::class), ['auth']);
+Router::get('/products/:id', app(MakeShowProductController::class), ['auth']);
+Router::post('/products', app(MakeInsertProductController::class), ['auth']);
+Router::put('/products/:id', app(MakeUpdateProductController::class), ['auth']);
+Router::delete('/products/:id', app(MakeDeleteProductController::class), ['auth']);

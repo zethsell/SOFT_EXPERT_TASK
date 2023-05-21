@@ -27,7 +27,9 @@ function mountError($error = null): array | null | string
 
 function request()
 {
-  return json_decode(file_get_contents("php://input"), true) ?? [];
+  $body = json_decode(file_get_contents("php://input"), true) ?? [];
+  $header = ['accessToken' => $_SERVER['HTTP_AUTHORIZATION'] ?? null];
+  return array_merge($body, $header);
 }
 
 function sanitizeRequest(?array $request, array $keys): array

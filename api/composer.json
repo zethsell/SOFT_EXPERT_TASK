@@ -8,7 +8,9 @@
     "classmap": [
       "src/"
     ],
-    "files": []
+    "files": [
+      "src/main/config/middlewares.php"
+    ]
   },
   "authors": [
     {

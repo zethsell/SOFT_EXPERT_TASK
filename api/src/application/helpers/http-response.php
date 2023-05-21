@@ -19,6 +19,11 @@ class HttpResponse
     return Response::json('', 204);
   }
 
+  public static function forbidden()
+  {
+    return Response::json(['error' => 'Access denied'], 403);
+  }
+
   public static function badRequest($error = null)
   {
     return Response::json(['error' => mountError($error) ?? 'Bad Request'], 400);

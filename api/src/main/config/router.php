@@ -1,5 +1,6 @@
 <?php
 
+use Src\Main\Adapters\AdaptMiddleware;
 use Src\Main\Adapters\AdaptRoute;
 use Src\Main\Helpers\RouterResponse;
 
@@ -7,25 +8,25 @@ class Router
 {
   const PREFIX = '/api';
 
-  public static function get(string $route, mixed $preBuilt)
+  public static function get(string $route, mixed $preBuilt,  array $middlewares = [])
   {
-    self::handleResponse($route, 'GET', $preBuilt);
+    self::handleResponse($route, 'GET', $preBuilt, $middlewares);
   }
-  public static function post(string $route, mixed $preBuilt)
+  public static function post(string $route, mixed $preBuilt,  array $middlewares = [])
   {
-    self::handleResponse($route, 'POST', $preBuilt);
+    self::handleResponse($route, 'POST', $preBuilt, $middlewares);
   }
-  public static function put(string $route, mixed $preBuilt)
+  public static function put(string $route, mixed $preBuilt,  array $middlewares = [])
   {
-    self::handleResponse($route, 'PUT', $preBuilt);
+    self::handleResponse($route, 'PUT', $preBuilt, $middlewares);
   }
-  public static function patch(string $route, mixed $preBuilt)
+  public static function patch(string $route, mixed $preBuilt,  array $middlewares = [])
   {
-    self::handleResponse($route, 'PATCH', $preBuilt);
+    self::handleResponse($route, 'PATCH', $preBuilt, $middlewares);
   }
-  public static function delete(string $route, mixed $preBuilt)
+  public static function delete(string $route, mixed $preBuilt,  array $middlewares = [])
   {
-    self::handleResponse($route, 'DELETE', $preBuilt);
+    self::handleResponse($route, 'DELETE', $preBuilt, $middlewares);
   }
 
   public static function error()
@@ -33,7 +34,7 @@ class Router
     RouterResponse::notFound();
   }
 
-  private static function handleResponse(string $route, string $method, mixed $preBuilt)
+  private static function handleResponse(string $route, string $method, mixed $preBuilt, array $middlewares)
   {
     $route = self::PREFIX . $route;
     if (!self::matchRoute($route)) {
@@ -42,6 +43,9 @@ class Router
     if (!self::matchMethod($method)) {
       return;
     }
+
+    AdaptMiddleware::handle($middlewares);
+
     if (is_callable($preBuilt)) {
       call_user_func_array($preBuilt, request());
       exit();
