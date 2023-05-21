@@ -16,8 +16,8 @@ class CreateProductsSells
       $table->integer('quantity');
       $table->foreign('product_id')->references('id')->on('products');
       $table->foreign('sell_id')->references('id')->on('sells')->onDelete('CASCADE');
+      $table->timestamp('updated_at')->nullable();
       $table->timestamps();
-      $table->softDeletes();
     });
   }
 

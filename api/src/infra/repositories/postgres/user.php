@@ -9,7 +9,7 @@ use Src\Domain\Contract\Repositories\User\IShowUser;
 use Src\Domain\Contract\Repositories\User\IShowUserByEmail;
 use Src\Infra\Repositories\Postgres\Models\User;
 
-class UserRpository implements IListUser, IShowUser, IShowUserByEmail, ISaveUser, IDeleteUser
+class UserRepository implements IListUser, IShowUser, IShowUserByEmail, ISaveUser, IDeleteUser
 {
   public function list(): array
   {

@@ -5,6 +5,7 @@ use Src\Main\Helpers\RouterResponse;
 
 class Router
 {
+  const PREFIX = '/api';
 
   public static function get(string $route, mixed $preBuilt)
   {
@@ -34,6 +35,7 @@ class Router
 
   private static function handleResponse(string $route, string $method, mixed $preBuilt)
   {
+    $route = self::PREFIX . $route;
     if (!self::matchRoute($route)) {
       return;
     }
@@ -56,9 +58,11 @@ class Router
     $requesUrl = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
     $serverUrl =  explode('/', $requesUrl);
     array_shift($serverUrl);
+    array_shift($serverUrl);
     $localUrl = explode('/', $route);
     array_shift($localUrl);
-    return ($localUrl[0] === $serverUrl[0]) && (count($localUrl) === count($serverUrl));
+    array_shift($localUrl);
+    return (current($localUrl) === current($serverUrl)) && (count($localUrl) === count($serverUrl));
   }
 
   private static function matchMethod(string $method)
@@ -70,16 +74,16 @@ class Router
   {
     $requestUrl = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
     $serverUrl =  explode('/', $requestUrl);
-    $serverUrl = array_slice($serverUrl, 2);
-
+    $serverUrl = array_slice($serverUrl, 3);
     $localUrl = explode('/', $route);
-    $localUrl = array_slice($localUrl, 2);
-    $localUrl = str_replace(':', '', $localUrl);
-
+    $localUrl = array_slice($localUrl, 3);
     $params = [];
 
     foreach ($serverUrl as $key => $value) {
-      $params[$localUrl[$key]] = $value;
+      if (str_contains($localUrl[$key], ':')) {
+        $localUrl = str_replace(':', '', $localUrl);
+        $params[$localUrl[$key]] = $value;
+      }
     }
 
     return $params;

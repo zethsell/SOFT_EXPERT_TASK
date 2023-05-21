@@ -1,15 +1,15 @@
 <?php
 
-namespace Src\Infra\Repostiories\Postgres\Models;
+namespace Src\Infra\Repositories\Postgres\Models;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Eloquent\Model;
+use Src\Infra\Repositories\Postgres\Models\Traits\SoftDeletes;
 
-Capsule::schema()->create('todos', function ($table) {
-  $table->increments('id');
-  $table->string('todo');
-  $table->string('description');
-  $table->string('category');
-  $table->integer('user_id')->unsigned();
-  $table->timestamps();
-  $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-});
+class ProductType extends Model
+{
+  use SoftDeletes;
+
+  protected $table = 'product_types';
+  protected $fillable = ['id', 'description', 'tax'];
+  protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+}

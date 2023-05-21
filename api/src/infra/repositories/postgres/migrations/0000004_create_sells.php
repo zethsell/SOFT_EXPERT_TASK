@@ -11,7 +11,7 @@ class CreateSells
     Database::schema()->create('sells', function ($table) {
       $table->increments('id');
       $table->timestamps();
-      $table->softDeletes();
+      $table->timestamp('updated_at')->nullable();
     });
   }
 

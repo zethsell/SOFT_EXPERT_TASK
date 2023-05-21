@@ -3,12 +3,12 @@
 namespace Src\Main\Factories\Infra\Repositories\Postgres;
 
 use Src\Main\Factories\Factory;
-use Src\Infra\Repositories\Postgres\UserRepository;
+use Src\Infra\Repositories\Postgres\ProductRepository;
 
-class MakeUserRepository extends Factory
+class MakeProductRepository extends Factory
 {
   public static function make()
   {
-    return new UserRepository();
+    return new ProductRepository();
   }
 }
