@@ -1,3 +1,3 @@
 <?php
-import('@/main/config/router');
-import('@/main/routes/index');
+import('@/main/routes/auth');
+import('@/main/routes/migration');

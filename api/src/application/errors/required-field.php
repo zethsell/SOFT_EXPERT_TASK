@@ -12,6 +12,6 @@ class RequiredFieldError extends Error
       ? 'Field required'
       : "The field $fieldName is required!";
 
-    parent::__construct($message, 422);
+    parent::__construct($message, 412);
   }
 }

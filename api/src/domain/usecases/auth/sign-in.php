@@ -14,6 +14,6 @@ class SignIn implements ISignIn
 
   public function setupSignIn($params)
   {
-    return User::get();
+    return $params;
   }
 }

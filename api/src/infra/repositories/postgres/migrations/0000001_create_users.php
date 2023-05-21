@@ -11,6 +11,7 @@ class CreateUsers
     Database::schema()->create('users', function ($table) {
       $table->increments('id');
       $table->string('name');
+      $table->string('password');
       $table->string('email')->unique();
       $table->timestamps();
     });

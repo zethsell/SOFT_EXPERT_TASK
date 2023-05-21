@@ -4,10 +4,9 @@ namespace Src\Main\Adapters;
 
 class AdaptRoute
 {
-  public static function handle($controller)
+  public static function handle($preBuilt)
   {
-    $_REQUEST = json_decode(file_get_contents("php://input"), true);
-    $request = $_REQUEST;
-    return $controller->handle($request);
+    $controller = $preBuilt->make();
+    return $controller->handle(request());
   }
 }

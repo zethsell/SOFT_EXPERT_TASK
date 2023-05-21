@@ -1,57 +1,59 @@
 <?php
 
+use Src\Main\Adapters\AdaptRoute;
+use Src\Main\Helpers\RouterResponse;
+
 class Router
 {
-  static function get(string $route, mixed $result)
+
+  public static function get(string $route, mixed $preBuilt)
   {
-    if (!self::matchRoute($route)) return;
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-      echo $result;
-      exit();
-      self::route($route, $result);
-    }
-    http_response_code(405);
-    echo json_encode(['error' => 'Not Found']);
+    self::handleResponse($route, 'GET', $preBuilt);
   }
-  static function post(string $route, mixed $result)
+  public static function post(string $route, mixed $preBuilt)
   {
-    if (!self::matchRoute($route)) return;
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      echo $result;
-      exit();
-    }
+    self::handleResponse($route, 'POST', $preBuilt);
   }
-  static function put(string $route, mixed $result)
+  public static function put(string $route, mixed $preBuilt)
   {
-    if (!self::matchRoute($route)) return;
-    if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    }
+    self::handleResponse($route, 'PUT', $preBuilt);
   }
-  static function patch(string $route, mixed $result)
+  public static function patch(string $route, mixed $preBuilt)
   {
-    if (!self::matchRoute($route)) return;
-    if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-    }
+    self::handleResponse($route, 'PATCH', $preBuilt);
   }
-  static function delete(string $route, mixed $result)
+  public static function delete(string $route, mixed $preBuilt)
   {
-    if (!self::matchRoute($route)) return;
-    if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    }
-  }
-  static function any(string $route, mixed $result)
-  {
+    self::handleResponse($route, 'DELETE', $preBuilt);
   }
 
-  static private function matchRoute(string $route)
+  // static function any(string $route, mixed $result)
+  // {
+  // }
+
+  private static function handleResponse(string $route, string $method, mixed $preBuilt)
+  {
+    if (!self::matchRoute($route)) {
+      return;
+    }
+    if (!self::matchMethod($method)) {
+      RouterResponse::methodNotAllowed();
+    }
+    $result = AdaptRoute::handle($preBuilt);
+    RouterResponse::success($result);
+  }
+
+  private static function matchRoute(string $route)
   {
     return ($_SERVER['REQUEST_URI'] === $route);
-    // http_response_code(404);
-    // echo json_encode(['error' => 'Not Found']);
-    // exit();
   }
 
-  static private function route($route, $path_to_include)
+  private static function matchMethod(string $method)
+  {
+    return ($_SERVER['REQUEST_METHOD'] === $method);
+  }
+
+  private static function route($route, $path_to_include)
   {
     $callback = $path_to_include;
     if (!is_callable($callback)) {

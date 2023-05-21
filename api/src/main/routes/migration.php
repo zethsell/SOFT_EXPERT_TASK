@@ -12,7 +12,6 @@ use Src\Infra\Repositories\Postgres\Migrations\CreateUsers;
 use Src\Main\Adapters\AdaptRoute;
 use Src\Main\Factories\Application\Controllers\Auth\MakeSignInController;
 
-Router::post('/auth', AdaptRoute::handle(MakeSignInController::make()));
 
 Router::get('/migrate-up', function () {
   $create0 = new CreateMigrations();
