@@ -16,8 +16,8 @@ class EmailConfirmationValidator implements Validator
     if (is_null($this->email) || !isset($this->email)) {
       return new EmailInvalidError();
     }
-    $emailVerify = (gettype($this->email)  === 'object')
-      ? $this->email->value
+    $emailVerify = (gettype($this->email)  === 'array')
+      ? $this->email['value']
       : $this->email;
 
     $isValid = $this->emailValidator($emailVerify);

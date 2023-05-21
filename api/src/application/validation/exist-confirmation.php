@@ -34,10 +34,10 @@ class ExistConfirmationValidator implements Validator
       $param = intval($param);
     }
 
-    $find = $this->model->first($param);
+    $find = $this->model->whereId($param)->first();
 
     if (!$find) {
-      return new ContentNotFound($this->fieldName);
+      return new ContentNotFound();
     }
   }
 }

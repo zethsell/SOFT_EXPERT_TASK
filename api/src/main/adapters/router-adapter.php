@@ -4,9 +4,9 @@ namespace Src\Main\Adapters;
 
 class AdaptRoute
 {
-  public static function handle($preBuilt)
+  public static function handle($preBuilt, $params = [])
   {
     $controller = $preBuilt->make();
-    return $controller->handle(request());
+    return $controller->handle(array_merge(request(), $params));
   }
 }

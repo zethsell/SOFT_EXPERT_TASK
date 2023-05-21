@@ -10,10 +10,5 @@ use Src\Domain\Contract\Repositories\User\IShowUserByEmail;
 interface ISignIn
 {
   public function __construct(IShowUserByEmail $repo, IEncrypter $crypt, ITokenGenerator $token);
-
-  /**
-   * @param $params[password,email]
-   * @return $accessToken
-   */
   public function setupSignIn($params): array | Error;
 }

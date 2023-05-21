@@ -27,22 +27,22 @@ class UniqueValidator implements Validator
       return new FieldInvalidError();
     }
 
-    $param = (gettype($this->object) === 'object')
-      ? $this->object->value
+    $param = (gettype($this->object) === 'array')
+      ? (object)$this->object
       : $this->object;
 
     $result = $this->model
       ->where(function ($query) use ($param) {
-        $query->where($this->fieldName, $param);
+        $query->where($this->fieldName, $param?->value ?? $param);
 
         if (isset($param->id)) {
-          $query->whereId('!=', $param->id);
+          $query->where('id', '!=', intval($param->id));
         }
       })
       ->count();
 
     if ($result > 0) {
-      return new UniqueError($this->fieldName, $param);
+      return new UniqueError($this->fieldName, $param?->value ?? $param);
     }
   }
 }

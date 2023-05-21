@@ -13,7 +13,9 @@ class UserRpository implements IListUser, IShowUser, IShowUserByEmail, ISaveUser
 {
   public function list(): array
   {
-    return User::orderBy('name', 'ASC')->get();
+    return User::orderBy('name', 'ASC')
+      ->get(['id', 'name', 'email', 'created_at', 'updated_at'])
+      ->toArray();
   }
 
   public function show($id): ?User
@@ -28,9 +30,10 @@ class UserRpository implements IListUser, IShowUser, IShowUserByEmail, ISaveUser
 
   public function save($data): ?User
   {
-    return (!isset($data['id']))
-      ? User::create($data)
-      : User::whereId($data['id'])->update($data);
+    $user = (!isset($data['id'])) ? new User : User::whereId($data['id'])->first();
+    $user->fill($data)->save();
+    unset($user['password']);
+    return $user;
   }
 
   public function delete($id): void

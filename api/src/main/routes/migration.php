@@ -9,9 +9,6 @@ use Src\Infra\Repositories\Postgres\Migrations\CreateProductsSells;
 use Src\Infra\Repositories\Postgres\Migrations\CreateProductTypes;
 use Src\Infra\Repositories\Postgres\Migrations\CreateSells;
 use Src\Infra\Repositories\Postgres\Migrations\CreateUsers;
-use Src\Main\Adapters\AdaptRoute;
-use Src\Main\Factories\Application\Controllers\Auth\MakeSignInController;
-
 
 Router::get('/migrate-up', function () {
   $create0 = new CreateMigrations();
@@ -26,7 +23,8 @@ Router::get('/migrate-up', function () {
   $create4->up();
   $create5 = new CreateProductsSells();
   $create5->up();
-  return 'ok';
+  echo 'ok';
+  exit();
 });
 
 Router::get('/migrate-down', function () {
@@ -42,5 +40,6 @@ Router::get('/migrate-down', function () {
   $create5->down();
   $create6 = new CreateUsers();
   $create6->down();
-  return 'ok';
+  echo 'ok';
+  exit();
 });
