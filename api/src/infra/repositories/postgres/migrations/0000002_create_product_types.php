@@ -13,7 +13,7 @@ class CreateProductTypes
       $table->string('description');
       $table->decimal('tax', 10, 2)->default(0);
       $table->timestamps();
-      $table->timestamp('updated_at')->nullable();
+      $table->softDeletes();
     });
   }
 

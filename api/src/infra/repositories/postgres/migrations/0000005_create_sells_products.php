@@ -14,10 +14,11 @@ class CreateProductsSells
       $table->bigInteger('sell_id');
       $table->integer('value');
       $table->integer('quantity');
+      $table->decimal('tax', 10, 2);
       $table->foreign('product_id')->references('id')->on('products');
       $table->foreign('sell_id')->references('id')->on('sells')->onDelete('CASCADE');
-      $table->timestamp('updated_at')->nullable();
       $table->timestamps();
+      $table->softDeletes();
     });
   }
 

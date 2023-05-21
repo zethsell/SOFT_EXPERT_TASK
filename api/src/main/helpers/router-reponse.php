@@ -14,13 +14,13 @@ class RouterResponse
 
   public static function methodNotAllowed()
   {
-    echo Response::json(['error' => 'Method Not Allowed'],  405);
+    echo Response::json(['error' => 'Method Not Allowed'], 405);
     exit();
   }
 
   public static function notFound()
   {
-    echo Response::json(['error' => 'Content not found'],  404);
+    echo Response::json(['error' => 'Content not found'], 404);
     exit();
   }
 }
