@@ -23,11 +23,11 @@ async function __create() {
   await router.push({ name: 'product-manager' })
 }
 
-async function __edit(id: number) {
+async function __edit(id?: number) {
   await router.push({ name: 'product-manager', params: { id } })
 }
 
-function __delete(id: number) {
+function __delete(id?: number) {
   void apiDelete(`products/${id}`)
   products.value = products.value?.filter(product => product.id !== id)
 }
@@ -57,13 +57,13 @@ function __delete(id: number) {
           <span>{{ product.value }}</span>
         </div>
         <div class="item">
-          <span>{{ product.product_type.description }}</span>
+          <span>{{ product?.product_type?.description }}</span>
         </div>
         <div class=" item buttons">
-          <m-icon-button class="text-blue-400 w-10 h-10" @click="__edit(product.id)">
+          <m-icon-button class="text-blue-400 w-10 h-10" @click="__edit(product?.id)">
             <fa-icon :icon="['fas', 'pencil-alt']" />
           </m-icon-button>
-          <m-icon-button class="text-red-700 w-10 h-10" @click="__delete(product.id)">
+          <m-icon-button class="text-red-700 w-10 h-10" @click="__delete(product?.id)">
             <fa-icon :icon="['fas', 'trash']" />
           </m-icon-button>
         </div>

@@ -1,4 +1,4 @@
-import { ProductTypeInformation } from "./product-type"
+import type { ProductTypeInformation } from "./product-type"
 
 export type ProductRegister = {
   id?: number

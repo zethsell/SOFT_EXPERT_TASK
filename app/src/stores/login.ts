@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia'
-import { Login, Logged, UserRegister } from '@/models'
-import { alertError } from '@/helpers'
+import type { Login, Logged, UserRegister } from '@/models'
 import { api } from '@/api'
 import { router } from '@/router'
-import { alertSuccess } from '@/helpers'
+import { alertSuccess, alertError } from '@/helpers'
 
 export const useLoginStore = defineStore({
   id: 'credentials',

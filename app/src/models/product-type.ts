@@ -1,4 +1,4 @@
-import { TaxInformation } from "."
+import type { TaxInformation } from "."
 
 export type ProductTypeRegister = {
   id?: number

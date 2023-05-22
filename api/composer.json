@@ -32,7 +32,7 @@
   "scripts": {
     "serve": [
       "Composer\\Config::disableProcessTimeout",
-      "cd ./src/main && php -S localhost:8003"
+      "cd ./src/main && php -S localhost:8000"
     ],
     "migrate": "cd ./src/application/commands && php migration-up.php"
   }

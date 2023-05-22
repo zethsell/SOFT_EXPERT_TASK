@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8003/api',
+  baseURL: 'http://localhost:8000/api',
   timeout: 10000
 })
 

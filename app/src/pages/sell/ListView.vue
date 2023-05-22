@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import MIconButton from '@/components/buttons/MIconButton.vue'
 import { apiGet, apiDelete } from '@/api/fetch';
-import type { SellInformation } from '@/models';
+import type { SellInformation, Detail } from '@/models';
 import { ref, onMounted } from 'vue';
 import { convertDate } from '@/helpers'
 
@@ -18,7 +18,7 @@ async function __list() {
   loadingReq.value = true
 }
 
-function sumValue(details) {
+function sumValue(details: Detail[]) {
   const value = details.map(detail => (detail.value + Number(detail.tax)) * detail.quantity).reduce((a, b) => (a + b), 0)
   return value.toFixed(2)
 }

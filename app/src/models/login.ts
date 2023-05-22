@@ -1,4 +1,4 @@
-import { UserInformation } from '.'
+import type { UserInformation } from '.'
 
 export type Login = {
   email: string

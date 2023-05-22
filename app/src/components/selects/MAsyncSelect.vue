@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { PropType, ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { apiGet } from '@/api/fetch'
 
 const options = ref<Array<{ id: number, description: string }>>([])
