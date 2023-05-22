@@ -2,9 +2,9 @@
 
 Ferramentas utilizadas:
 
-php 8.1.19
-composer 2.5.1
-postgres
+- php 8.1.19
+- composer 2.5.1
+- postgres
 
 Abrir o diretório api que se encontra no diretório raiz
 
