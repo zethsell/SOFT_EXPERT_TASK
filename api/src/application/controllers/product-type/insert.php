@@ -27,9 +27,8 @@ class InsertProductTypeController extends Controller
 
   protected function buildValidators($request): array
   {
-    $values = sanitizeRequest($request, ['description', 'tax']);
+    $values = sanitizeRequest($request, ['description']);
     return [
-      ...builder::of(['value' => $values['tax'], 'fieldName' => 'tax'])->required()->build(),
       ...builder::of([
         'value' => $values['description'],
         'fieldName' => 'description'

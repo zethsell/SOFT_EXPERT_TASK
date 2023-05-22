@@ -12,7 +12,7 @@ class ProductTypeRepository implements IListProductType, IShowProductType, ISave
 {
   public function list(): array
   {
-    return ProductType::noTrash()
+    return ProductType::with('taxes')
       ->orderBy('description', 'ASC')
       ->get()
       ->toArray();
@@ -20,7 +20,7 @@ class ProductTypeRepository implements IListProductType, IShowProductType, ISave
 
   public function show($id): ?ProductType
   {
-    return ProductType::noTrash()->whereId($id)->first();
+    return ProductType::noTrash()->with('taxes')->whereId($id)->first();
   }
 
   public function save($data): ?ProductType

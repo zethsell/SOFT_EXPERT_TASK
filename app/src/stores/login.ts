@@ -39,7 +39,7 @@ export const useLoginStore = defineStore({
         })
     },
     async redirectLoggedUser() {
-      await api.get('users/me').then(async (res) => {
+      await api.get('users-me').then(async (res) => {
         this.credentials.user = res.data
         await router.push({ name: 'home' })
       })

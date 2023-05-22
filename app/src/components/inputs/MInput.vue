@@ -3,13 +3,17 @@ import { computed, ref } from 'vue';
 
 const props = withDefaults(defineProps<{
   label: string
-  type?: 'text' | 'password' | 'email'
+  type?: 'text' | 'password' | 'email' | 'number'
   required: boolean,
-  modelValue: string
+  modelValue: string | number,
+  disabled?: boolean,
+  readonly?: boolean
 }>(), {
   type: 'text',
   modelValue: '',
-  required: false
+  required: false,
+  disabled: false,
+  readonly: false
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -29,8 +33,8 @@ function updateValue(event: Event) {
   <div id="input-wrapper">
     <label>{{ props.label }}</label>
     <div>
-      <input :type="!show ? props.type : 'text'" :required="props.required" @change="updateValue"
-        :value="props.modelValue" />
+      <input :type="!show ? props.type : 'text'" :required="props.required" @change="updateValue" :disabled="disabled"
+        :readonly="readonly" :value="props.modelValue" />
       <fa-icon id="icon" @click="show = !show" v-if="props.type === 'password'" :icon="['fas', icon]" />
     </div>
   </div>

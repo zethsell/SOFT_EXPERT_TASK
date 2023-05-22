@@ -13,7 +13,9 @@ class ProductRepository implements IListProduct, IShowProduct, ISaveProduct, IDe
   public function list(): array
   {
     return Product::orderBy('description', 'ASC')
-      ->with('productType')
+      ->with('productType', function ($type) {
+        $type->with('taxes');
+      })
       ->get()
       ->toArray();
   }

@@ -17,6 +17,6 @@ class CreateSells
 
   public function down()
   {
-    Database::schema()->delete('sells');
+    Database::schema()->drop('sells');
   }
 }

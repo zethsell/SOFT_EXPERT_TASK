@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
  */
 import {
     faUser as fasUser,
+    faHome as fasHome,
     faKey as fasKey,
     faBars as fasBars,
     faCamera as fasCamera,
@@ -34,6 +35,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
+    fasHome,
     fasKey,
     fasCamera,
     fasUser,

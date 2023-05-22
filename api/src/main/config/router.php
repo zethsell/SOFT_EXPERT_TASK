@@ -44,15 +44,21 @@ class Router
       return;
     }
 
+
+
     AdaptMiddleware::handle($middlewares);
 
     if (is_callable($preBuilt)) {
-      call_user_func_array($preBuilt, request());
+      call_user_func_array($preBuilt, []);
       exit();
     }
 
-    $params = self::parseParams($route);
+    if ($_SERVER['REQUEST_URI'] === $route) {
+      $result = AdaptRoute::handle($preBuilt);
+      RouterResponse::success($result);
+    }
 
+    $params = self::parseParams($route);
     $result = AdaptRoute::handle($preBuilt, $params);
     RouterResponse::success($result);
   }

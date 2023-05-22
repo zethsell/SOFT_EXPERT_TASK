@@ -3,14 +3,16 @@
 const props = withDefaults(defineProps<{
   label: string
   type?: 'button' | 'submit'
-  loading: boolean
+  loading?: boolean
+  disabled?: boolean
 }>(), {
   type: 'button',
   loading: false,
+  disabled: false,
 })
 </script>
 <template>
-  <button :type="props.type" :disabled="loading">
+  <button :type="props.type" :disabled="loading || disabled">
     <span v-if="!loading">{{ props.label }} </span>
     <fa-icon v-else :icon="['fas', 'spinner']" class="fa-spin" />
   </button>

@@ -19,6 +19,6 @@ class CreateUsers
 
   public function down()
   {
-    Database::schema()->delete('users');
+    Database::schema()->drop('users');
   }
 }

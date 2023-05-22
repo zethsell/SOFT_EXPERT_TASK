@@ -6,7 +6,7 @@ export type UserRegister = {
 }
 
 export type UserInformation = {
-  id: string
+  id: number
   name: string
   email: string
 }
