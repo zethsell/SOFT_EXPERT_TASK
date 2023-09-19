@@ -8,7 +8,7 @@ class Router
 {
   const PREFIX = '/api';
 
-  public static function get(string $route, mixed $preBuilt,  array $middlewares = [])
+  public static function get(string $route, mixed $preBuilt, array $middlewares = [])
   {
     self::handleResponse($route, 'GET', $preBuilt, $middlewares);
   }
@@ -75,7 +75,7 @@ class Router
 
   private static function matchMethod(string $method)
   {
-    return ($_SERVER['REQUEST_METHOD'] === $method);
+    return $_SERVER['REQUEST_METHOD'] === $method;
   }
 
   private static function parseParams(string $route): array

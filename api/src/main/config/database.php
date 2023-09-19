@@ -11,7 +11,8 @@ $connection->addConnection([
   "port" => envVar('DB_PORT', "5432"),
   "database" => envVar('DB_DATABASE', "acl"),
   "username" => envVar('DB_USERNAME', "root"),
-  "password" => envVar('DB_PASSWORD', "password")
+  "password" => envVar('DB_PASSWORD', "password"),
+  "schema" => envVar('DB_SCHEMA', "public")
 ]);
 $connection->setAsGlobal();
 $connection->bootEloquent();

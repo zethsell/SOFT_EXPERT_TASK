@@ -20,7 +20,7 @@ class ValidationBuilder
     return new ValidationBuilder($params);
   }
 
-  public function   required()
+  public function required()
   {
     $error = null;
     if (gettype($this->value) === 'string') {
